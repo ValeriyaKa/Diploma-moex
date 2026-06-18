@@ -19,7 +19,7 @@ RUN python -m pip install --upgrade pip \
 COPY backend ./backend
 COPY frontend ./frontend
 COPY models ./models
-COPY docker_start.py .
+COPY deploy/docker_start.py ./docker_start.py
 
 EXPOSE 8501
 

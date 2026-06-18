@@ -84,8 +84,7 @@ gost_scalable_diagrams_svg_from_v9/
 
 # Keep source/config files that should be published
 !.env.example
-!config.yaml
-!config_step1.yaml
-!config_boost_errors.yaml
+!config/
+!config/*.yaml
 !requirements*.txt
 !diagrams/*.svg
