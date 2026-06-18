@@ -1,0 +1,124 @@
+<svg viewBox="0 0 780 520" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: 'Times New Roman', 'PT Serif', Georgia, serif; }
+    .box { fill: #fff; stroke: #000; stroke-width: 1.5; }
+    .title { font-size: 14px; font-weight: bold; text-anchor: middle; fill: #000; }
+    .label { font-size: 11px; fill: #000; text-anchor: middle; }
+    .proto { font-size: 10px; fill: #000; font-style: italic; }
+    .arr { stroke: #000; stroke-width: 2; fill: none; marker-end: url(#ah); }
+    .arr2 { stroke: #000; stroke-width: 2; fill: none; marker-end: url(#ah); marker-start: url(#ah2); }
+    .section { font-size: 12px; fill: #000; text-anchor: middle; }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#000"/>
+    </marker>
+    <marker id="ah2" markerWidth="10" markerHeight="8" refX="0" refY="4" orient="auto">
+      <path d="M10,0 L0,4 L10,8 Z" fill="#000"/>
+    </marker>
+  </defs>
+
+  <!-- ====== Divider: Сервер | Клиент ====== -->
+  <line x1="560" y1="0" x2="560" y2="520" stroke="#000" stroke-width="1" stroke-dasharray="6 4"/>
+  <text x="300" y="510" class="section">Сервер</text>
+  <text x="670" y="510" class="section">Клиент</text>
+
+  <!-- ====== DATABASE (cylinder) ====== -->
+  <ellipse cx="170" cy="30" rx="110" ry="18" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <rect x="60" y="30" width="220" height="40" fill="#fff" stroke="none"/>
+  <line x1="60" y1="30" x2="60" y2="70" stroke="#000" stroke-width="1.5"/>
+  <line x1="280" y1="30" x2="280" y2="70" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="170" cy="70" rx="110" ry="18" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <text x="170" y="57" class="title">Supabase (PostgreSQL)</text>
+
+  <!-- Arrow DB ↔ Backend -->
+  <line x1="170" y1="88" x2="170" y2="140" class="arr2"/>
+  <text x="182" y="105" class="proto">Internal</text>
+  <text x="182" y="118" class="proto">SQL/data</text>
+  <text x="182" y="131" class="proto">REST API</text>
+
+  <!-- ====== BACKEND BLOCK (large container) ====== -->
+  <rect x="30" y="142" width="500" height="130" class="box"/>
+  <text x="280" y="160" class="title">Backend (Python 3.11)</text>
+
+  <!-- Inner: Collectors -->
+  <rect x="45" y="170" width="220" height="90" class="box"/>
+  <text x="155" y="190" class="label" style="font-weight:bold;">Коллекторы данных</text>
+  <text x="155" y="208" class="label" style="font-size:10px;">moex.py · macro.py</text>
+  <text x="155" y="222" class="label" style="font-size:10px;">news_gdelt_raw.py</text>
+  <text x="155" y="236" class="label" style="font-size:10px;">news_finbert.py</text>
+  <text x="155" y="250" class="label" style="font-size:10px;">fundamentals.py</text>
+
+  <!-- Inner: API -->
+  <rect x="280" y="170" width="235" height="90" class="box"/>
+  <text x="398" y="190" class="label" style="font-weight:bold;">FastAPI :8000</text>
+  <text x="398" y="208" class="label" style="font-size:10px;">GET /api/predictions</text>
+  <text x="398" y="222" class="label" style="font-size:10px;">GET /api/candles/{ticker}</text>
+  <text x="398" y="236" class="label" style="font-size:10px;">POST /api/predict/{ticker}</text>
+  <text x="398" y="250" class="label" style="font-size:10px;">ML inference (ensemble)</text>
+
+  <!-- ====== S3 STORAGE (cylinder) ====== -->
+  <ellipse cx="170" cy="320" rx="100" ry="16" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <rect x="70" y="320" width="200" height="35" fill="#fff" stroke="none"/>
+  <line x1="70" y1="320" x2="70" y2="355" stroke="#000" stroke-width="1.5"/>
+  <line x1="270" y1="320" x2="270" y2="355" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="170" cy="355" rx="100" ry="16" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <text x="170" y="344" class="label" style="font-weight:bold;">YC Object Storage (S3)</text>
+
+  <!-- Arrow Backend → S3 -->
+  <line x1="155" y1="272" x2="155" y2="304" class="arr"/>
+  <text x="167" y="292" class="proto">export.py</text>
+
+  <!-- ====== DATASPHERE ====== -->
+  <rect x="30" y="400" width="260" height="80" class="box"/>
+  <text x="160" y="420" class="title" style="font-size:12px;">DataSphere (GPU V100)</text>
+  <text x="160" y="438" class="label" style="font-size:10px;">train_models.py</text>
+  <rect x="42" y="446" width="72" height="22" class="box"/>
+  <text x="78" y="461" class="label" style="font-size:9px;">LightGBM</text>
+  <rect x="120" y="446" width="66" height="22" class="box"/>
+  <text x="153" y="461" class="label" style="font-size:9px;">XGBoost</text>
+  <rect x="192" y="446" width="86" height="22" class="box"/>
+  <text x="235" y="461" class="label" style="font-size:9px;">LSTM+Att</text>
+
+  <!-- Arrow S3 ↔ DataSphere -->
+  <line x1="160" y1="371" x2="160" y2="398" class="arr2"/>
+  <text x="172" y="389" class="proto">CSV / .pkl .pt</text>
+
+  <!-- ====== DATA SOURCES (bottom-left) ====== -->
+  <rect x="320" y="400" width="210" height="80" class="box"/>
+  <text x="425" y="418" class="label" style="font-weight:bold;">Источники данных</text>
+  <text x="425" y="436" class="label" style="font-size:10px;">MOEX ISS API</text>
+  <text x="425" y="450" class="label" style="font-size:10px;">GDELT GKG v2</text>
+  <text x="425" y="464" class="label" style="font-size:10px;">Smart-Lab · RSS · CBR</text>
+
+  <!-- Arrow Sources → Collectors -->
+  <line x1="425" y1="400" x2="425" y2="305" class="arr" style="stroke-dasharray:5 3;"/>
+  <path d="M425,305 L425,272" class="arr" style="stroke-dasharray:5 3;"/>
+  <text x="437" y="345" class="proto">HTTP/REST</text>
+
+  <!-- ====== CLIENT SIDE ====== -->
+
+  <!-- Streamlit -->
+  <rect x="590" y="155" width="160" height="60" class="box"/>
+  <text x="670" y="178" class="label" style="font-weight:bold;">Streamlit :8501</text>
+  <text x="670" y="195" class="label" style="font-size:10px;">Dashboard + Plotly</text>
+  <text x="670" y="207" class="label" style="font-size:10px;">SHAP waterfall</text>
+
+  <!-- Arrow FastAPI → Streamlit -->
+  <line x1="515" y1="200" x2="588" y2="185" class="arr"/>
+  <text x="548" y="182" class="proto">HTTP</text>
+  <text x="548" y="194" class="proto">JSON</text>
+
+  <!-- Веб-браузер -->
+  <rect x="590" y="250" width="160" height="45" class="box"/>
+  <text x="670" y="278" class="title" style="font-size:12px;">Веб-браузер</text>
+
+  <!-- Arrow Streamlit → Browser -->
+  <line x1="670" y1="215" x2="670" y2="248" class="arr"/>
+  <text x="682" y="236" class="proto">HTML</text>
+
+  <!-- 35 tickers -->
+  <rect x="605" y="330" width="130" height="50" class="box"/>
+  <text x="670" y="355" style="font-size:26px; font-weight:bold; text-anchor:middle; fill:#000; font-family:'Times New Roman',serif;">35</text>
+  <text x="670" y="374" class="label" style="font-size:10px;">акций MOEX</text>
+</svg>

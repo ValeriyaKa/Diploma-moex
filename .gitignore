@@ -1,0 +1,91 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Virtual environments and local secrets
+.env
+.env.local
+.venv/
+venv/
+env/
+ENV/
+
+# IDE and OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Large ML artifacts
+models/
+models2/
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.h5
+*.onnx
+*.cbm
+
+# Data exports and generated datasets
+data/
+features.csv
+fundamentals.csv
+macro.csv
+news_sentiment.json
+news_sentiment*.json
+news_sentiment*.csv
+walk_forward_*.csv
+*.csv
+*.json
+*.ndjson
+
+# Generated artifacts and temporary files
+artifacts/
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+.~lock.*
+~$*
+test.txt
+
+# Research notebooks and platform upload bundles
+*.ipynb
+kaggle_upload/
+
+# Office documents, thesis drafts, reports, and presentations
+*.docx
+*.docx.new
+*.pdf
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+
+# Rendered diagrams and screenshots
+diagrams/*.png
+diagrams/*.jpg
+diagrams/*.jpeg
+diagrams/gost/
+gost_scalable_diagrams_svg/
+gost_scalable_diagrams_svg_from_v9/
+
+# Keep source/config files that should be published
+!.env.example
+!config.yaml
+!config_step1.yaml
+!config_boost_errors.yaml
+!requirements*.txt
+!diagrams/*.svg

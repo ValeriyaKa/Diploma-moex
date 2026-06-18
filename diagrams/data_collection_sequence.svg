@@ -1,0 +1,327 @@
+<svg viewBox="0 0 850 1050" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: 'Times New Roman', 'PT Serif', Georgia, serif; }
+    .actor { fill: #f0f0f0; stroke: #000; stroke-width: 1.5; }
+    .title { font-size: 12px; font-weight: bold; text-anchor: middle; fill: #000; }
+    .num { font-size: 10px; fill: #000; font-weight: bold; text-anchor: middle; }
+    .grp { font-size: 11px; font-weight: bold; fill: #000; }
+    .arr { stroke: #000; stroke-width: 1.5; fill: none; marker-end: url(#ah); }
+    .dash-arr { stroke: #000; stroke-width: 1.2; fill: none; stroke-dasharray: 5 3; marker-end: url(#ah); }
+    .life { stroke: #000; stroke-width: 1; stroke-dasharray: 4 3; }
+    .frame { fill: none; stroke: #000; stroke-width: 1; }
+    .frame-hdr { fill: #e8e8e8; stroke: #000; stroke-width: 1; }
+    .note { fill: #fff; stroke: #000; stroke-width: 1; stroke-dasharray: 3 2; }
+    .leg { font-size: 10px; fill: #000; }
+    .leg-hdr { font-size: 10px; fill: #000; font-weight: bold; }
+    .leg-num { font-size: 10px; fill: #000; font-weight: bold; text-anchor: middle; }
+    .tbl { fill: #fff; stroke: #000; stroke-width: 1; }
+    .tbl-hdr { fill: #e0e0e0; stroke: #000; stroke-width: 1; }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#000"/>
+    </marker>
+  </defs>
+
+  <!-- ====== TITLE ====== -->
+  <text x="425" y="18" style="font-size:14px; font-weight:bold; text-anchor:middle;">UML Sequence Diagram: Data Collection Pipeline</text>
+
+  <!-- ====== ACTORS ====== -->
+  <!-- Scheduler -->
+  <rect x="20" y="32" width="100" height="30" class="actor"/>
+  <text x="70" y="52" class="title">Scheduler</text>
+  <line x1="70" y1="62" x2="70" y2="620" class="life"/>
+  <rect x="64" y="95" width="12" height="520" fill="#fff" stroke="#000" stroke-width="1"/>
+
+  <!-- Collector -->
+  <rect x="175" y="32" width="100" height="30" class="actor"/>
+  <text x="225" y="52" class="title">Collector</text>
+  <line x1="225" y1="62" x2="225" y2="620" class="life"/>
+  <rect x="219" y="95" width="12" height="520" fill="#fff" stroke="#000" stroke-width="1"/>
+
+  <!-- MOEX ISS API -->
+  <rect x="375" y="32" width="110" height="30" class="actor"/>
+  <text x="430" y="52" class="title">MOEX ISS API</text>
+  <line x1="430" y1="62" x2="430" y2="620" class="life"/>
+  <rect x="424" y="115" width="12" height="80" fill="#fff" stroke="#000" stroke-width="1"/>
+  <rect x="424" y="262" width="12" height="58" fill="#fff" stroke="#000" stroke-width="1"/>
+  <rect x="424" y="490" width="12" height="48" fill="#fff" stroke="#000" stroke-width="1"/>
+
+  <!-- RSS Feeds -->
+  <rect x="555" y="32" width="90" height="30" class="actor"/>
+  <text x="600" y="52" class="title">RSS Feeds</text>
+  <line x1="600" y1="62" x2="600" y2="620" class="life"/>
+  <rect x="594" y="370" width="12" height="35" fill="#fff" stroke="#000" stroke-width="1"/>
+
+  <!-- FinBERT -->
+  <rect x="700" y="32" width="80" height="30" class="actor"/>
+  <text x="740" y="52" class="title">FinBERT</text>
+  <line x1="740" y1="62" x2="740" y2="620" class="life"/>
+  <rect x="734" y="415" width="12" height="35" fill="#fff" stroke="#000" stroke-width="1"/>
+
+  <!-- DB -->
+  <rect x="800" y="32" width="40" height="30" class="actor"/>
+  <text x="820" y="52" class="title">DB</text>
+  <line x1="820" y1="62" x2="820" y2="620" class="life"/>
+  <rect x="814" y="160" width="12" height="22" fill="#fff" stroke="#000" stroke-width="1"/>
+  <rect x="814" y="298" width="12" height="22" fill="#fff" stroke="#000" stroke-width="1"/>
+  <rect x="814" y="455" width="12" height="22" fill="#fff" stroke="#000" stroke-width="1"/>
+  <rect x="814" y="540" width="12" height="22" fill="#fff" stroke="#000" stroke-width="1"/>
+  <rect x="814" y="590" width="12" height="22" fill="#fff" stroke="#000" stroke-width="1"/>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 1: Свечи OHLCV -->
+  <!-- ============================================================ -->
+  <rect x="8" y="80" width="835" height="118" class="frame"/>
+  <rect x="8" y="80" width="130" height="18" class="frame-hdr"/>
+  <text x="73" y="93" class="grp">loop [35 tickers]</text>
+
+  <!-- 1: Scheduler → Collector -->
+  <line x1="76" y1="108" x2="219" y2="108" class="arr"/>
+  <circle cx="148" cy="108" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="148" y="112" class="num">1</text>
+
+  <!-- 2: Collector → MOEX ISS (дневные) -->
+  <line x1="231" y1="130" x2="424" y2="130" class="arr"/>
+  <circle cx="328" cy="130" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="328" y="134" class="num">2</text>
+
+  <!-- 3: MOEX ISS → Collector (ответ) -->
+  <line x1="424" y1="150" x2="231" y2="150" class="dash-arr"/>
+  <circle cx="328" cy="150" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="328" y="154" class="num">3</text>
+
+  <!-- 4: Collector → DB (сохранение) -->
+  <line x1="231" y1="170" x2="814" y2="170" class="arr"/>
+  <circle cx="523" cy="170" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="523" y="174" class="num">4</text>
+
+  <!-- DB → Collector (ответ) -->
+  <line x1="814" y1="182" x2="231" y2="182" class="dash-arr"/>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 2: Индикаторы -->
+  <!-- ============================================================ -->
+  <rect x="8" y="205" width="835" height="38" class="frame"/>
+  <rect x="8" y="205" width="90" height="18" class="frame-hdr"/>
+  <text x="53" y="218" class="grp">indicators</text>
+
+  <!-- 5: локальный расчёт -->
+  <rect x="195" y="224" width="100" height="16" class="note"/>
+  <circle cx="245" cy="232" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="245" y="236" class="num">5</text>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 3: Макро -->
+  <!-- ============================================================ -->
+  <rect x="8" y="250" width="835" height="82" class="frame"/>
+  <rect x="8" y="250" width="60" height="18" class="frame-hdr"/>
+  <text x="38" y="263" class="grp">macro</text>
+
+  <!-- 6: Collector → MOEX ISS -->
+  <line x1="231" y1="278" x2="424" y2="278" class="arr"/>
+  <circle cx="328" cy="278" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="328" y="282" class="num">6</text>
+
+  <!-- 7: MOEX ISS → Collector -->
+  <line x1="424" y1="298" x2="231" y2="298" class="dash-arr"/>
+  <circle cx="328" cy="298" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="328" y="302" class="num">7</text>
+
+  <!-- 8: Collector → DB -->
+  <line x1="231" y1="315" x2="814" y2="315" class="arr"/>
+  <circle cx="523" cy="315" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="523" y="319" class="num">8</text>
+
+  <line x1="814" y1="325" x2="231" y2="325" class="dash-arr"/>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 4: Новости + NLP -->
+  <!-- ============================================================ -->
+  <rect x="8" y="340" width="835" height="145" class="frame"/>
+  <rect x="8" y="340" width="120" height="18" class="frame-hdr"/>
+  <text x="68" y="353" class="grp">loop [5 RSS]</text>
+
+  <!-- 9: Collector → RSS -->
+  <line x1="231" y1="372" x2="594" y2="372" class="arr"/>
+  <circle cx="413" cy="372" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="413" y="376" class="num">9</text>
+
+  <!-- 10: RSS → Collector -->
+  <line x1="594" y1="395" x2="231" y2="395" class="dash-arr"/>
+  <circle cx="413" cy="395" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="413" y="399" class="num">10</text>
+
+  <!-- 11: Collector → FinBERT -->
+  <line x1="231" y1="420" x2="734" y2="420" class="arr"/>
+  <circle cx="483" cy="420" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="483" y="424" class="num">11</text>
+
+  <!-- 12: FinBERT → Collector -->
+  <line x1="734" y1="443" x2="231" y2="443" class="dash-arr"/>
+  <circle cx="483" cy="443" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="483" y="447" class="num">12</text>
+
+  <!-- 13: Collector → DB -->
+  <line x1="231" y1="465" x2="814" y2="465" class="arr"/>
+  <circle cx="523" cy="465" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="523" y="469" class="num">13</text>
+
+  <line x1="814" y1="475" x2="231" y2="475" class="dash-arr"/>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 5: Фундаментальные -->
+  <!-- ============================================================ -->
+  <rect x="8" y="492" width="835" height="80" class="frame"/>
+  <rect x="8" y="492" width="120" height="18" class="frame-hdr"/>
+  <text x="68" y="505" class="grp">loop [35 tickers]</text>
+
+  <!-- 14: Collector → MOEX ISS -->
+  <line x1="231" y1="522" x2="424" y2="522" class="arr"/>
+  <circle cx="328" cy="522" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="328" y="526" class="num">14</text>
+
+  <!-- 15: MOEX ISS → Collector -->
+  <line x1="424" y1="542" x2="231" y2="542" class="dash-arr"/>
+  <circle cx="328" cy="542" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="328" y="546" class="num">15</text>
+
+  <!-- 16: Collector → DB -->
+  <line x1="231" y1="558" x2="814" y2="558" class="arr"/>
+  <circle cx="523" cy="558" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="523" y="562" class="num">16</text>
+
+  <line x1="814" y1="567" x2="231" y2="567" class="dash-arr"/>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 6: Feature Engineering -->
+  <!-- ============================================================ -->
+  <rect x="8" y="580" width="835" height="38" class="frame"/>
+  <rect x="8" y="580" width="130" height="18" class="frame-hdr"/>
+  <text x="73" y="593" class="grp">feature engineering</text>
+
+  <!-- 17: Collector → DB (чтение + build) -->
+  <line x1="231" y1="605" x2="814" y2="605" class="arr"/>
+  <circle cx="523" cy="605" r="8" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="523" y="609" class="num">17</text>
+
+  <line x1="814" y1="613" x2="231" y2="613" class="dash-arr"/>
+
+  <!-- ============================================================ -->
+  <!-- ЛЕГЕНДА — ТАБЛИЦА -->
+  <!-- ============================================================ -->
+  <rect x="8" y="640" width="835" height="405" class="tbl"/>
+  <rect x="8" y="640" width="835" height="22" class="tbl-hdr"/>
+  <text x="35" y="656" class="leg-hdr">№</text>
+  <text x="100" y="656" class="leg-hdr">Направление</text>
+  <text x="270" y="656" class="leg-hdr">Описание</text>
+  <text x="650" y="656" class="leg-hdr">Данные / объём</text>
+
+  <!-- Разделители столбцов -->
+  <line x1="55" y1="640" x2="55" y2="1045" stroke="#000" stroke-width="0.5"/>
+  <line x1="165" y1="640" x2="165" y2="1045" stroke="#000" stroke-width="0.5"/>
+  <line x1="530" y1="640" x2="530" y2="1045" stroke="#000" stroke-width="0.5"/>
+
+  <!-- Строки -->
+  <line x1="8" y1="682" x2="843" y2="682" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="676" class="leg-num">1</text>
+  <text x="75" y="676" class="leg">Scheduler → Collector</text>
+  <text x="175" y="676" class="leg">Запуск ежедневного сбора данных (CRON, 09:00 MSK)</text>
+  <text x="540" y="676" class="leg">—</text>
+
+  <line x1="8" y1="704" x2="843" y2="704" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="698" class="leg-num">2</text>
+  <text x="75" y="698" class="leg">Collector → MOEX ISS</text>
+  <text x="175" y="698" class="leg">GET .../securities/{ticker}/candles?interval=24</text>
+  <text x="540" y="698" class="leg">Дневные свечи, 35 тикеров × ~4 года</text>
+
+  <line x1="8" y1="726" x2="843" y2="726" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="720" class="leg-num">3</text>
+  <text x="75" y="720" class="leg">MOEX ISS → Collector</text>
+  <text x="175" y="720" class="leg">Ответ: массив {begin, open, high, low, close, volume, value}</text>
+  <text x="540" y="720" class="leg">+ часовые свечи (?interval=60, 48ч)</text>
+
+  <line x1="8" y1="748" x2="843" y2="748" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="742" class="leg-num">4</text>
+  <text x="75" y="742" class="leg">Collector → DB</text>
+  <text x="175" y="742" class="leg">UPSERT candles ON CONFLICT (time, ticker, interval)</text>
+  <text x="540" y="742" class="leg">603 894 строки (1d + 1h)</text>
+
+  <line x1="8" y1="770" x2="843" y2="770" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="764" class="leg-num">5</text>
+  <text x="75" y="764" class="leg">Collector (локально)</text>
+  <text x="175" y="764" class="leg">Расчёт: RSI-14, MACD, BB(20), ATR-14, OBV, SMA, EMA</text>
+  <text x="540" y="764" class="leg">pandas_ta, 17 индикаторов</text>
+
+  <line x1="8" y1="792" x2="843" y2="792" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="786" class="leg-num">6</text>
+  <text x="75" y="786" class="leg">Collector → MOEX ISS</text>
+  <text x="175" y="786" class="leg">GET .../securities/USD000UTSTOM + IMOEX + RTSI + Brent</text>
+  <text x="540" y="786" class="leg">4 макроинструмента</text>
+
+  <line x1="8" y1="814" x2="843" y2="814" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="808" class="leg-num">7</text>
+  <text x="75" y="808" class="leg">MOEX ISS → Collector</text>
+  <text x="175" y="808" class="leg">Ответ: [{TRADEDATE, CLOSE}, ...] с пагинацией по 100</text>
+  <text x="540" y="808" class="leg">USD/RUB, IMOEX, RTSI, Brent</text>
+
+  <line x1="8" y1="836" x2="843" y2="836" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="830" class="leg-num">8</text>
+  <text x="75" y="830" class="leg">Collector → DB</text>
+  <text x="175" y="830" class="leg">UPSERT macro ON CONFLICT (time)</text>
+  <text x="540" y="830" class="leg">1 144 строки</text>
+
+  <line x1="8" y1="858" x2="843" y2="858" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="852" class="leg-num">9</text>
+  <text x="75" y="852" class="leg">Collector → RSS</text>
+  <text x="175" y="852" class="leg">GET XML-ленты: РБК, ТАСС, РИА Новости, Finam, Investing.com</text>
+  <text x="540" y="852" class="leg">5 RSS-источников</text>
+
+  <line x1="8" y1="880" x2="843" y2="880" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="874" class="leg-num">10</text>
+  <text x="75" y="874" class="leg">RSS → Collector</text>
+  <text x="175" y="874" class="leg">XML: {title, published, description} по каждой новости</text>
+  <text x="540" y="874" class="leg">~50–200 новостей/день</text>
+
+  <line x1="8" y1="902" x2="843" y2="902" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="896" class="leg-num">11</text>
+  <text x="75" y="896" class="leg">Collector → FinBERT</text>
+  <text x="175" y="896" class="leg">ProsusAI/finbert: анализ тональности заголовка + описания</text>
+  <text x="540" y="896" class="leg">positive / negative / neutral</text>
+
+  <line x1="8" y1="924" x2="843" y2="924" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="918" class="leg-num">12</text>
+  <text x="75" y="918" class="leg">FinBERT → Collector</text>
+  <text x="175" y="918" class="leg">score ∈ [−1, +1], привязка к тикеру по ключевым словам</text>
+  <text x="540" y="918" class="leg">Агрегация: 1d / 3d / 7d</text>
+
+  <line x1="8" y1="946" x2="843" y2="946" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="940" class="leg-num">13</text>
+  <text x="75" y="940" class="leg">Collector → DB</text>
+  <text x="175" y="940" class="leg">UPSERT news_sentiment</text>
+  <text x="540" y="940" class="leg">1 587 строк</text>
+
+  <line x1="8" y1="968" x2="843" y2="968" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="962" class="leg-num">14</text>
+  <text x="75" y="962" class="leg">Collector → MOEX ISS</text>
+  <text x="175" y="962" class="leg">GET /securities/{ticker}/dividends.json</text>
+  <text x="540" y="962" class="leg">Даты отсечек, суммы</text>
+
+  <line x1="8" y1="990" x2="843" y2="990" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="984" class="leg-num">15</text>
+  <text x="75" y="984" class="leg">MOEX ISS → Collector</text>
+  <text x="175" y="984" class="leg">+ парсинг Smart-Lab: P/E, P/B, EV/EBITDA, ROE, div_yield</text>
+  <text x="540" y="984" class="leg">11 фундаментальных признаков</text>
+
+  <line x1="8" y1="1012" x2="843" y2="1012" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="1006" class="leg-num">16</text>
+  <text x="75" y="1006" class="leg">Collector → DB</text>
+  <text x="175" y="1006" class="leg">Сохранение fundamentals.csv</text>
+  <text x="540" y="1006" class="leg">40 075 строк</text>
+
+  <line x1="8" y1="1034" x2="843" y2="1034" stroke="#000" stroke-width="0.3"/>
+  <text x="35" y="1028" class="leg-num">17</text>
+  <text x="75" y="1028" class="leg">Collector ↔ DB</text>
+  <text x="175" y="1028" class="leg">SELECT всех данных → build_features() → 55 признаков</text>
+  <text x="540" y="1028" class="leg">47 дневных + 8 часовых → ансамбль</text>
+</svg>
